@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">GuessingGame</string>
+    <string name="play">Play!</string>
+    <string name="the_guessing_game">The Guessing Game</string>
+    <string name="level_1">Level 1</string>
+    <string name="high_score_title">High Score:</string>
+    <string name="highScore">00</string>
 </resources>
