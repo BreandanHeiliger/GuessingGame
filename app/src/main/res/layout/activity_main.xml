@@ -33,7 +33,8 @@
         android:layout_centerHorizontal="true"
         android:clickable="true"
         android:enabled="true"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:onClick="@string/level_1" />
 
     <TextView
         android:layout_width="wrap_content"
