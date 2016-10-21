@@ -6,48 +6,60 @@ import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.media.AudioManager;
 import android.media.SoundPool;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.os.Handler;
 
 import java.io.IOException;
-import java.util.logging.Level;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     //Used to play start sound.
     private SoundPool soundPool;
-
     int playsound = -1;
+
+    //The play button.
+    public Button buttonPlay;
+
+    //For wobble animation.
+    Animation wobble;
+
+    Intent m;
 
     //Used to load persistent high score.
     SharedPreferences prefs;
+    //SharedPreferences.Editor editor;
+    String dataName = "MyData";
+    String intName = "TopScore";
+    public static int highScore;
 
-    //The play button.
-    public Button playButton;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String theHighScore = "00";
 
+        //Set wobble object
+        wobble = AnimationUtils.loadAnimation(this, R.anim.wobble);
+
+        prefs = getSharedPreferences(dataName, MODE_PRIVATE);
+        highScore = prefs.getInt(intName, 0);
+
+        TextView textHighScore = (TextView) findViewById(R.id.theHighScore);
+        textHighScore.setText(highScore);
+
+
+        //Set soundPool.
         soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
+
 
         //Try to get start sound.
         try {
@@ -69,30 +81,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 
-
         //Set button
-        playButton = (Button) findViewById(R.id.play);
-        playButton.setOnClickListener(this);
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        buttonPlay = (Button) findViewById(R.id.playButton);
+        buttonPlay.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
 
+        buttonPlay.startAnimation(wobble);
+
         //Play start sound.
         soundPool.play(playsound, 1, 1, 0, 0, 1);
 
         //Create new intent for level1 and start level.
-        Intent m;
         m = new Intent(this, Level1.class);
         startActivity(m);
-    }
 
 
+    }//End onClick override.
 
-
-
-}
+}//End main activity.

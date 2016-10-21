@@ -1,6 +1,8 @@
 package com.example.breandan.guessinggame;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.media.AudioManager;
@@ -10,6 +12,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 import android.widget.Button;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import java.util.Random;
 import java.io.IOException;
@@ -20,18 +24,25 @@ public class Level1 extends AppCompatActivity implements View.OnClickListener {
 
     int correctSound = -1;          //For use with the "correct" sound.
     int incorrectSound = -1;        //For use with the "incorrect" sound.
-    int guessCount = 1;             //Used to keep track of guesses.
+    int possiblePoints = 3;         //Max possible points.
+    int guesses = 0;                //Score is possiblePoints minus guesses.
     int currentScore = 0;           //Used to keep track of current score.
 
     //Create random selection between 1 and 3
     Random randInt = new Random();
     int ourRandom = randInt.nextInt(3) + 1;
 
-    //Make a button from each of the 3 buttons in our layout
-    Button button1 = (Button) findViewById(R.id.button1);
-    Button button2 = (Button) findViewById(R.id.button2);
-    Button button3 = (Button) findViewById(R.id.button3);
+    //Make a buttons from each of the 3 buttons in our layout
+    Button l1b1, l1b2, l1b3;
 
+    //For high score.
+    SharedPreferences prefs;
+    SharedPreferences.Editor editor;
+
+    int highScore;
+
+    //For wobble animation.
+    Animation wobble;
 
 
     @Override
@@ -39,6 +50,20 @@ public class Level1 extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level1);
 
+        //Set wobble object
+        wobble = AnimationUtils.loadAnimation(this, R.anim.wobble);
+
+        //Create buttons.
+        l1b1 = (Button) findViewById(R.id.l1button1);
+        l1b1.setOnClickListener(this);
+
+        l1b2 = (Button) findViewById(R.id.l1button2);
+        l1b2.setOnClickListener(this);
+
+        l1b3 = (Button) findViewById(R.id.l1button3);
+        l1b3.setOnClickListener(this);
+
+        //Used to play sounds.
         soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
 
         //Try to get start sound.
@@ -64,45 +89,36 @@ public class Level1 extends AppCompatActivity implements View.OnClickListener {
 
         }
 
-
-
-        //make each of them listen for clicks
-        button1.setOnClickListener(this);
-        button2.setOnClickListener(this);
-        button3.setOnClickListener(this);
-
-
     }
 
     @Override
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.button1:  //when the first button is pressed
+            case R.id.l1button1:  //when the first button is pressed
 
-                //Check if 1 is the correct answer.
-                if (ourRandom == 1)
+                if (ourRandom == 1) {
+                    l1b1.startAnimation(wobble);
                     startNextLevel();
-                else
-                    incorrect();
-
-                break;
-
-            case R.id.button2:  //when the second button is pressed
-
-                //Check if 2 is the correct answer.
-                if (ourRandom == 2)
-                    startNextLevel();
-                else
+                } else
                     incorrect();
                 break;
 
-            case R.id.button3:  //when the third button is pressed
+            case R.id.l1button2:
 
-                //Check if 3 is the correct answer.
-                if (ourRandom == 3)
+                if (ourRandom == 2) {
+                    l1b2.startAnimation(wobble);
                     startNextLevel();
-                else
+                } else
+                    incorrect();
+                break;
+
+            case R.id.l1button3:
+
+                if (ourRandom == 3) {
+                    l1b3.startAnimation(wobble);
+                    startNextLevel();
+                } else
                     incorrect();
                 break;
         }
@@ -111,26 +127,46 @@ public class Level1 extends AppCompatActivity implements View.OnClickListener {
 
     void startNextLevel() {
 
+        Context context = getApplicationContext();
+        CharSequence text = "Correct!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+
         //Play "correct" sound and do animation.
         soundPool.play(correctSound, 1, 1, 0, 0, 1);
 
         //Compare number of counts and assign correct score.
         //3 points for first guess, 2 for second, 1 for third and zero for all others.
 
-        //Maybe do toast for score with explanation.
+
 
         //Save score then start next level.
+
+        Intent nl = new Intent(this, Level2.class);
+        startActivity(nl);
 
     }//End startNextLevel
 
     void incorrect() {
 
         //Play "incorrect" sound and do animation.
-        //Play "correct" sound and do animation.
         soundPool.play(incorrectSound, 1, 1, 0, 0, 1);
 
-        //Increment number of guesses in guessCount.
-        guessCount++;
+
+        //Display toast saying guess was not correct.
+        Context context = getApplicationContext();
+        CharSequence text = "NOPE!";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+
+
+        //Decrement number of possible points.
+        if(possiblePoints != 0)
+            possiblePoints--;
 
     }
 

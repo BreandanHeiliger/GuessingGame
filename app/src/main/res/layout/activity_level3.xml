@@ -11,4 +11,118 @@
     android:screenOrientation="portrait"
     tools:context="com.example.breandan.guessinggame.Level3">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Level 3"
+        android:id="@+id/l3title"
+        android:layout_marginTop="85dp"
+        android:textColor="#ffffff"
+        android:textSize="30sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button1"
+        android:id="@+id/l3b1"
+        android:layout_above="@+id/l3b6"
+        android:layout_toStartOf="@+id/l3b2"
+        android:textSize="30sp" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button2"
+        android:id="@+id/l3b2"
+        android:textSize="30sp"
+        android:layout_above="@+id/l3b7"
+        android:layout_toEndOf="@+id/l3b6" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button3"
+        android:id="@+id/l3b3"
+        android:textSize="30sp"
+        android:layout_above="@+id/l3b10"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button4"
+        android:id="@+id/l3b4"
+        android:textSize="30sp"
+        android:layout_above="@+id/l3b10"
+        android:layout_toStartOf="@+id/l3b10" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button5"
+        android:id="@+id/l3b5"
+        android:layout_above="@+id/l3b10"
+        android:layout_alignStart="@+id/l3b10"
+        android:textSize="30sp" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button6"
+        android:id="@+id/l3b6"
+        android:textSize="30sp"
+        android:layout_below="@+id/l3b2"
+        android:layout_toStartOf="@+id/l3b7" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button7"
+        android:id="@+id/l3b7"
+        android:textSize="30sp"
+        android:layout_alignTop="@+id/l3b8"
+        android:layout_toStartOf="@+id/l3b8" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button8"
+        android:id="@+id/l3b8"
+        android:textSize="30sp"
+        android:layout_marginRight="109dp"
+        android:layout_marginBottom="162dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button9"
+        android:id="@+id/l3b9"
+        android:textSize="30sp"
+        android:layout_alignTop="@+id/l3b8"
+        android:layout_toEndOf="@+id/l3b3" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button10"
+        android:id="@+id/l3b10"
+        android:textSize="30sp"
+        android:layout_alignTop="@+id/l3b9"
+        android:layout_toEndOf="@+id/l3b9" />
+
 </RelativeLayout>
