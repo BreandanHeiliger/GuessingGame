@@ -61,10 +61,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textHighScore.setText(highScore + "");
 
 
+        //Set button
+        buttonPlay = (Button) findViewById(R.id.play);
+        buttonPlay.setOnClickListener(this);
+
         //Set soundPool.
         soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
-
-
         //Try to get start sound.
         try {
             AssetManager assetsManager = getAssets();
@@ -83,11 +85,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             toast.show();
 
         }
-
-
-        //Set button
-        buttonPlay = (Button) findViewById(R.id.playButton);
-        buttonPlay.setOnClickListener(this);
     }
 
     @Override

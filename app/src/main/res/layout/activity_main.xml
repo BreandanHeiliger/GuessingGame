@@ -23,19 +23,6 @@
         android:textColor="#ffffff"
         android:textStyle="bold|italic" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/play"
-        android:id="@+id/playButton"
-        android:layout_marginTop="97dp"
-        android:layout_below="@+id/highScoreTV"
-        android:layout_centerHorizontal="true"
-        android:clickable="true"
-        android:enabled="true"
-        android:textStyle="bold"
-        android:onClick="@string/level_1" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,4 +49,18 @@
         android:textSize="25sp"
         android:textColor="#ffffff"
         android:textStyle="bold" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/play"
+        android:id="@+id/play"
+        android:clickable="true"
+        android:enabled="true"
+        android:textStyle="bold"
+        android:onClick="@string/level_1"
+        android:layout_below="@+id/highScoreTV"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="69dp" />
+
 </RelativeLayout>

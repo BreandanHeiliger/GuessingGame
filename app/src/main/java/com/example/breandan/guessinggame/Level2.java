@@ -36,8 +36,8 @@ public class Level2 extends AppCompatActivity implements View.OnClickListener {
     Animation wobble, incorrect;
     //For Toast
     Toast toast;
-    CharSequence text;
     Context context;
+    CharSequence text;
     int duration = Toast.LENGTH_SHORT;
 
     //Used to play sounds.
@@ -189,6 +189,7 @@ public class Level2 extends AppCompatActivity implements View.OnClickListener {
         if (currentScore > highScore) {
 
             //Toast for new high score.
+            context = getApplicationContext();
             text = "New High Score!";
             toast = Toast.makeText(context, text, duration);
             toast.show();

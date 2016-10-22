@@ -166,6 +166,7 @@ public class Level1 extends AppCompatActivity implements View.OnClickListener {
         if (currentScore > highScore) {
 
             //Toast for new high score.
+            context = getApplicationContext();
             text = "New High Score!";
             toast = Toast.makeText(context, text, duration);
             toast.show();
