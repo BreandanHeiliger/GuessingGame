@@ -10,6 +10,7 @@ import android.media.SoundPool;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Button;
 import android.view.animation.Animation;
@@ -24,6 +25,7 @@ public class Level2 extends AppCompatActivity implements View.OnClickListener {
     int possiblePoints = 5;
 
     //For high score.
+    SharedPreferences data;
     public static final String PREFS_NAME = "Game Data";
     String topScore = "TopScore";
     String scoreNow = "Current Score";
@@ -32,6 +34,11 @@ public class Level2 extends AppCompatActivity implements View.OnClickListener {
 
     //For wobble and incorrect animations.
     Animation wobble, incorrect;
+    //For Toast
+    Toast toast;
+    CharSequence text;
+    Context context;
+    int duration = Toast.LENGTH_SHORT;
 
     //Used to play sounds.
     private SoundPool soundPool;
@@ -46,6 +53,8 @@ public class Level2 extends AppCompatActivity implements View.OnClickListener {
     //Make a buttons from each of the 3 buttons in our layout
     Button l2b1, l2b2, l2b3, l2b4,l2b5;
 
+    TextView pointsPTV;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,10 +65,9 @@ public class Level2 extends AppCompatActivity implements View.OnClickListener {
         incorrect = AnimationUtils.loadAnimation(this, R.anim.incorrect);
 
         //Get preferences to change high score.
-        SharedPreferences data;
         data = getSharedPreferences(PREFS_NAME, 0);
         highScore = data.getInt(topScore, 0);
-        currentScore = data.getInt(topScore,0);
+        currentScore = data.getInt(scoreNow,0);
 
         //Create buttons.
         l2b1 = (Button) findViewById(R.id.l2b1);
@@ -88,13 +96,16 @@ public class Level2 extends AppCompatActivity implements View.OnClickListener {
             incorrectSound = soundPool.load(descriptor, 0);
 
         } catch (IOException e) {
-            Context context = getApplicationContext();
-            CharSequence text = "File not found!";
-            int duration = Toast.LENGTH_LONG;
+            context = getApplicationContext();
+            text = "File not found!";
 
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
         }
+
+        //Set possible points.
+        pointsPTV = (TextView) findViewById(R.id.l2PossiblePoints);
+        pointsPTV.setText("Points Possible: " + possiblePoints +"\nCurrent Score: " + currentScore);
 
     }//End onCreate override.
 
@@ -167,18 +178,10 @@ public class Level2 extends AppCompatActivity implements View.OnClickListener {
         //Add possible points to current score.
         currentScore+=possiblePoints;
 
-        //Show toast for correct answer, play sound,set scores, start next level.
-        Context context = getApplicationContext();
-        CharSequence text = "Correct!";
-        int duration = Toast.LENGTH_SHORT;
-
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
-
+        //Play correct sound.
         soundPool.play(correctSound, 1, 1, 0, 0, 1);
 
 
-        SharedPreferences data;
         data = getSharedPreferences(PREFS_NAME, 0);
         SharedPreferences.Editor editor = data.edit();
 
@@ -198,7 +201,7 @@ public class Level2 extends AppCompatActivity implements View.OnClickListener {
         editor.putInt(scoreNow, currentScore);
 
         // Commit the edits to current (and high score).
-        editor.commit();
+        editor.apply();
 
         Intent nl = new Intent(this, Level3.class);
         startActivity(nl);
@@ -207,22 +210,16 @@ public class Level2 extends AppCompatActivity implements View.OnClickListener {
 
     void incorrect() {
 
-        //Decrement number of possible points.
-        if(possiblePoints>0){
-            possiblePoints--;
-        }
-
-
         //Play "incorrect" sound and do animation.
         soundPool.play(incorrectSound, 1, 1, 0, 0, 1);
 
-        //Display toast saying guess was not correct.
-        Context context = getApplicationContext();
-        CharSequence text = "NOPE!";
-        int duration = Toast.LENGTH_SHORT;
+        //Decrement number of possible points.
+        if(possiblePoints>0)
+            possiblePoints--;
 
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+        //Set possible points.
+        pointsPTV = (TextView) findViewById(R.id.l2PossiblePoints);
+        pointsPTV.setText("Points Possible: " + possiblePoints +"\nCurrent Score: " + currentScore);
 
     }//End incorrect
 

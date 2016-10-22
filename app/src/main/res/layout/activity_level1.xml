@@ -53,4 +53,15 @@
         android:textSize="30sp"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/level1Title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/l1PossiblePoints"
+        android:layout_marginTop="53dp"
+        android:layout_below="@+id/level1Title"
+        android:layout_alignEnd="@+id/l1b2"
+        android:textColor="#ffffff" />
 </RelativeLayout>

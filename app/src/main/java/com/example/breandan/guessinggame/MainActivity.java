@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         currentScore = 0;
         SharedPreferences.Editor editor = data.edit();
         editor.putInt(scoreNow, currentScore);
-        editor.commit();
+        editor.apply();
 
         textHighScore = (TextView) findViewById(R.id.highScoreTV);
         textHighScore.setText(highScore + "");

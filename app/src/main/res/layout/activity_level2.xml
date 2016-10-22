@@ -74,4 +74,15 @@
         android:layout_toEndOf="@+id/l2b4"
         android:layout_marginStart="22dp"
         android:textSize="30sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/l2PossiblePoints"
+        android:layout_below="@+id/level2Title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="56dp"
+        android:textColor="#ffffff" />
 </RelativeLayout>
