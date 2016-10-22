@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button1"
-        android:id="@+id/l1button1"
+        android:id="@+id/l1b1"
         android:textSize="30sp"
         android:layout_centerVertical="true"
         android:layout_toStartOf="@+id/level1Title" />
@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button2"
-        android:id="@+id/l1button2"
+        android:id="@+id/l1b2"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:textSize="30sp"
@@ -49,7 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button3"
-        android:id="@+id/l1button3"
+        android:id="@+id/l1b3"
         android:textSize="30sp"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/level1Title" />

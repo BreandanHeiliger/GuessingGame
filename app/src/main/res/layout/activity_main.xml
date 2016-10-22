@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/paper"
-    android:screenOrientation="portrait"
+
     tools:context="com.example.breandan.guessinggame.MainActivity">
 
     <TextView
@@ -29,7 +29,7 @@
         android:text="@string/play"
         android:id="@+id/playButton"
         android:layout_marginTop="97dp"
-        android:layout_below="@+id/theHighScore"
+        android:layout_below="@+id/highScoreTV"
         android:layout_centerHorizontal="true"
         android:clickable="true"
         android:enabled="true"
@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/highScore"
-        android:id="@+id/theHighScore"
+        android:id="@+id/highScoreTV"
         android:layout_below="@+id/highScoreTitle"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="33dp"

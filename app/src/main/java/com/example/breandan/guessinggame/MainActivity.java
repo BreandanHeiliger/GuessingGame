@@ -15,11 +15,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.os.Handler;
 
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    //Used to load persistent high score.
+    public static  final String PREFS_NAME = "Game Data";
+    String topScore = "TopScore";
+    String scoreNow = "Current Score";
+    public static int highScore;
+    public static int currentScore = 0;
+    TextView textHighScore;
 
     //Used to play start sound.
     private SoundPool soundPool;
@@ -31,30 +38,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //For wobble animation.
     Animation wobble;
 
-    Intent m;
-
-    //Used to load persistent high score.
-    SharedPreferences prefs;
-    //SharedPreferences.Editor editor;
-    String dataName = "MyData";
-    String intName = "TopScore";
-    public static int highScore;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         //Set wobble object
         wobble = AnimationUtils.loadAnimation(this, R.anim.wobble);
 
-        prefs = getSharedPreferences(dataName, MODE_PRIVATE);
-        highScore = prefs.getInt(intName, 0);
+        //Get high score and set it to the proper location.
+        SharedPreferences data;
+        data = getSharedPreferences(PREFS_NAME, 0);
+        highScore = data.getInt(topScore, 0);
 
-        TextView textHighScore = (TextView) findViewById(R.id.theHighScore);
-        textHighScore.setText(highScore);
+        //Set current score to zero.
+        currentScore = 0;
+        SharedPreferences.Editor editor = data.edit();
+        editor.putInt(scoreNow, currentScore);
+        editor.commit();
+
+        textHighScore = (TextView) findViewById(R.id.highScoreTV);
+        textHighScore.setText(highScore + "");
 
 
         //Set soundPool.
@@ -95,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         soundPool.play(playsound, 1, 1, 0, 0, 1);
 
         //Create new intent for level1 and start level.
-        m = new Intent(this, Level1.class);
+        Intent m = new Intent(this, Level1.class);
         startActivity(m);
 
 
